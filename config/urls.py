@@ -21,7 +21,7 @@ from sales.views import homepage_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_view, name='index'),
-    path('/homepage', homepage_view, name='home'),
+    path('homepage/', homepage_view, name='home'),
     path('login/', login_view, name='login'),
     path('signup/', signup_view, name='signup'),
 ]
