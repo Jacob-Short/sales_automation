@@ -60,7 +60,7 @@ class SignUpView(View):
 def logout_view(request):
     logout(request)
     messages.success(request, 'You have successfully logged out.')
-    return HttpResponseRedirect(reverse('home'))
+    return render(request, 'index.html')
 
     
 def profile_view(request, id):
