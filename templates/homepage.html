@@ -11,7 +11,7 @@
 
 <body>
   {% block content %}
-  <h1>Welcome Welcome Welcome!!!</h1>
+  <h1>Welcome {{ request.user.username }}</h1>
 
   {% endblock %}
 </body>

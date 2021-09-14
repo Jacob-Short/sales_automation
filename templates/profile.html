@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Detail</title>
+</head>
+
+<body>
+    {% block content %}
+    <div class="card">
+        <div class="card-header">
+            Users Profile: {{ users_page.username }}
+        </div>
+        <div class="card-body">
+            <blockquote class="blockquote mb-0"></blockquote>
+            <p>Favorites:</p>
+            <p>Total Savings:</p>
+            {% if user_to_follow.username != request.user.username %}
+            <footer class="blockquote-footer">
+                <h5>Account Created:</h5>
+            </footer>
+            {% endif %}
+            </blockquote>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
