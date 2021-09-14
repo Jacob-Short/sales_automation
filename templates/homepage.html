@@ -13,6 +13,26 @@
   {% block content %}
   <h1>Welcome {{ request.user.username }}</h1>
 
+  {% for product in products %}
+
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{product.title}}</h5>
+      <p class="card-text">{{product.description}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{product.department}}</li>
+      <li class="list-group-item">{{product.productCategory}}</li>
+      <li class="list-group-item">{{product.customerRating}}</li>
+    </ul>
+    <div class="card-body">
+      <!-- <a href="#" class="card-link">{{product.primaryOffer.offerPrice}}</a>
+      <a href="#" class="card-link">{{product.primaryOffer.listPrice}}</a> -->
+    </div>
+  </div>
+  {% endfor %}
+
   {% endblock %}
 </body>
 

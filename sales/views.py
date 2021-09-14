@@ -33,17 +33,19 @@ def homepage_view(request):
 
     products = pd.DataFrame([])
 
-    for page in range(1,5):
+    # only going through first 2 pages for dev
+    for page in range(1,2):
         url = f"https://www.walmart.com/cp/api/get-deals-list?prg=desktop&dealsId=christmas-gifts&ps=60&page={page}&sort=new&shelf_id=61381&shelfType=manual"
         response = requests.get(url, headers=headers)
         data = json.loads(response.text)
-        products = products.append(pd.json_normalize(data['items']), ignore_index=True)
-        time.sleep(3)
+        df_products = products.append(pd.json_normalize(data['items']), ignore_index=True)
+        products = data['items']
+        time.sleep(1)
         print(f'Getting page {page}....')
 
-    products.to_csv('walmart-products.csv')
-
-    context = {}
+    # df_products.to_csv('walmart-products.csv')
+    # breakpoint()
+    context = {'products': products[:10]}
     return render(request, 'homepage.html', context)
 
 
