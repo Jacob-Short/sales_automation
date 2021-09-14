@@ -10,6 +10,7 @@ from authentication.models import MyUser
 
 def index_view(request):
     context = {}
+    breakpoint()
     return render(request, 'index.html', context)
 
 
@@ -49,4 +50,11 @@ def logout_view(request):
     logout(request)
     messages.success(request, 'You have successfully logged out.')
     return HttpResponseRedirect(reverse('home'))
+
+    
+def profile_view(request, id):
+    user = MyUser.objects.get(id=id)
+    users_page = user
+    context = {'users_page': users_page}
+    return render(request, 'profile.html', context)
 
