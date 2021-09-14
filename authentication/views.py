@@ -6,16 +6,25 @@ from django import forms
 from authentication.forms import LoginForm, SignUpForm
 from authentication.models import MyUser
 
+from django.views.generic import View
 
 
 def index_view(request):
     context = {}
-    breakpoint()
     return render(request, 'index.html', context)
 
 
-def login_view(request):
-    if request.method == 'POST':
+
+class LoginView(View):
+    '''logs in registered user'''
+
+    def get(self, request):
+        form = LoginForm()
+        context = {'form': form}
+        return render(request, 'generic_form.html', context)
+
+
+    def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
@@ -28,22 +37,24 @@ def login_view(request):
                 context = {}
                 return HttpResponseRedirect(reverse('home'))
 
-    form = LoginForm()
-    context = {'form': form}
-    return render(request, 'generic_form.html', context)
 
 
-def signup_view(request):
-    if request.method == 'POST':
+class SignUpView(View):
+    '''creates form for new user to register'''
+
+    def get(self, request):
+        form = SignUpForm()
+        context = {'form': form}
+        return render(request, 'generic_form.html', context)
+
+    
+    def post(self, request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             user = MyUser.objects.create_user(
                 username=data['name'], password=data['password'])
         return HttpResponseRedirect(reverse('home'))
-    form = SignUpForm()
-    context = {'form': form}
-    return render(request, 'generic_form.html', context)
 
 
 def logout_view(request):
